@@ -47,19 +47,20 @@ class ObjectivesPlugin @Inject constructor(
 
     fun reset() {
         for (objective in objectives) {
-            objective.startedOn = 0
-            objective.accomplishedOn = 0
+            objective.startedOn = dateUtil.now() - T.hours(2370).msecs()
+            objective.accomplishedOn = dateUtil.now() - T.hours(1).msecs()
         }
-        preferences.put(BooleanNonKey.ObjectivesBgIsAvailableInNs, false)
-        preferences.put(BooleanNonKey.ObjectivesPumpStatusIsAvailableInNS, false)
-        preferences.put(IntNonKey.ObjectivesManualEnacts, 0)
-        preferences.put(BooleanNonKey.ObjectivesProfileSwitchUsed, false)
-        preferences.put(BooleanNonKey.ObjectivesDisconnectUsed, false)
-        preferences.put(BooleanNonKey.ObjectivesReconnectUsed, false)
-        preferences.put(BooleanNonKey.ObjectivesTempTargetUsed, false)
-        preferences.put(BooleanNonKey.ObjectivesActionsUsed, false)
-        preferences.put(BooleanNonKey.ObjectivesLoopUsed, false)
-        preferences.put(BooleanNonKey.ObjectivesScaleUsed, false)
+        preferences.put(BooleanNonKey.ObjectivesBgIsAvailableInNs, true)
+        preferences.put(BooleanNonKey.ObjectivesPumpStatusIsAvailableInNS, true)
+        preferences.put(IntNonKey.ObjectivesManualEnacts, 1)
+        preferences.put(BooleanNonKey.ObjectivesProfileSwitchUsed, true)
+        preferences.put(BooleanNonKey.ObjectivesDisconnectUsed, true)
+        preferences.put(BooleanNonKey.ObjectivesReconnectUsed, true)
+        preferences.put(BooleanNonKey.ObjectivesTempTargetUsed, true)
+        preferences.put(BooleanNonKey.ObjectivesActionsUsed, true)
+        preferences.put(BooleanNonKey.ObjectivesLoopUsed, true)
+        preferences.put(BooleanNonKey.ObjectivesScaleUsed, true)
+        allPriorAccomplished(9)
     }
 
     fun allPriorAccomplished(position: Int): Boolean {
@@ -75,6 +76,7 @@ class ObjectivesPlugin @Inject constructor(
      */
     override fun isLoopInvocationAllowed(value: Constraint<Boolean>): Constraint<Boolean> {
         // Check if initialized
+        return true
         if (objectives.isEmpty()) return value
         if (!objectives[FIRST_OBJECTIVE].isStarted)
             value.set(false, rh.gs(R.string.objectivenotstarted, FIRST_OBJECTIVE + 1), this)
@@ -83,6 +85,7 @@ class ObjectivesPlugin @Inject constructor(
 
     override fun isLgsForced(value: Constraint<Boolean>): Constraint<Boolean> {
         // Check if initialized
+        return true
         if (objectives.isEmpty()) return value
         if (objectives[LGS_OBJECTIVE].isStarted && !objectives[LGS_OBJECTIVE].isAccomplished)
             value.set(true, rh.gs(R.string.objectivenotfinished, LGS_OBJECTIVE + 1), this)
@@ -91,6 +94,7 @@ class ObjectivesPlugin @Inject constructor(
 
     override fun isClosedLoopAllowed(value: Constraint<Boolean>): Constraint<Boolean> {
         // Check if initialized
+        return true
         if (objectives.isEmpty()) return value
         if (!objectives[CLOSED_LOOP_OBJECTIVE].isStarted)
             value.set(false, rh.gs(R.string.objectivenotstarted, CLOSED_LOOP_OBJECTIVE + 1), this)
@@ -99,6 +103,7 @@ class ObjectivesPlugin @Inject constructor(
 
     override fun isAutosensModeEnabled(value: Constraint<Boolean>): Constraint<Boolean> {
         // Check if initialized
+        return true
         if (objectives.isEmpty()) return value
         if (!objectives[AUTOSENS_OBJECTIVE].isStarted)
             value.set(false, rh.gs(R.string.objectivenotstarted, AUTOSENS_OBJECTIVE + 1), this)
@@ -107,6 +112,7 @@ class ObjectivesPlugin @Inject constructor(
 
     override fun isSMBModeEnabled(value: Constraint<Boolean>): Constraint<Boolean> {
         // Check if initialized
+        return true
         if (objectives.isEmpty()) return value
         if (!objectives[SMB_OBJECTIVE].isStarted)
             value.set(false, rh.gs(R.string.objectivenotstarted, SMB_OBJECTIVE + 1), this)
@@ -115,6 +121,7 @@ class ObjectivesPlugin @Inject constructor(
 
     override fun isAutomationEnabled(value: Constraint<Boolean>): Constraint<Boolean> {
         // Check if initialized
+        return true
         if (objectives.isEmpty()) return value
         if (!objectives[AUTO_OBJECTIVE].isStarted)
             value.set(false, rh.gs(R.string.objectivenotstarted, AUTO_OBJECTIVE + 1), this)
