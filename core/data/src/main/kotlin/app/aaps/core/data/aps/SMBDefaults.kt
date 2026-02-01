@@ -45,10 +45,9 @@ object SMBDefaults {
 
     // WARNING: use SMB with caution: it can and will automatically bolus up to max_iob worth of extra insulin
     // enableUAM:true // enable detection of unannounced meal carb absorption
-    public final static boolean enableUAM = true; // enable detection of unannounced meal carb absorption
     const val A52_risk_enable = false
 
-    public final static boolean enableSMB_with_COB = true; // ***** default false in oref1 ***** enable supermicrobolus while COB is positive
+    //public final static boolean enableSMB_with_COB = true; // ***** default false in oref1 ***** enable supermicrobolus while COB is positive
     //public final static boolean enableSMB_with_temptarget = true; // ***** default false in oref1 ***** enable supermicrobolus for eating soon temp targets
     // *** WARNING *** DO NOT USE enableSMB_always or enableSMB_after_carbs with xDrip+, Libre, or similar
     // xDrip+, LimiTTer, etc. do not properly filter out high-noise SGVs
@@ -56,7 +55,7 @@ object SMBDefaults {
     // if the CGM sensor reads falsely high and doesn't come down as actual BG does
     // public final static boolean enableSMB_always = false; // always enable supermicrobolus (unless disabled by high temptarget)
     // *** WARNING *** DO NOT USE enableSMB_always or enableSMB_after_carbs with xDrip+, Libre, or similar
-    public final static boolean enableSMB_after_carbs = false; // enable supermicrobolus for 6h after carbs, even with 0 COB
+    //public final static boolean enableSMB_after_carbs = false; // enable supermicrobolus for 6h after carbs, even with 0 COB
     //public final static boolean allowSMB_with_high_temptarget = false; // allow supermicrobolus (if otherwise enabled) even with high temp targets
     const val SMBInterval = 3 // minimum interval between SMBs, in minutes. (limited between 1 and 10 min)
     const val maxSMBBasalMinutes = 30 // maximum minutes of basal that can be delivered as a single SMB with uncovered COB
