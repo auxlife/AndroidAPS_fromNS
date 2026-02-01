@@ -101,8 +101,7 @@ abstract class Objective(
         }
 
         override val progress: String
-            get() = "100/100"
-                + " / " + getDurationText(minimumDuration))
+            get() = "100" + " / " + getDurationText(minimumDuration))
 
         private fun getDurationText(duration: Long): String {
             val days = floor(duration.toDouble() / T.days(1).msecs()).toInt()
