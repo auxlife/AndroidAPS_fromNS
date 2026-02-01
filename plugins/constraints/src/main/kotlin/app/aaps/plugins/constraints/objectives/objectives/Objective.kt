@@ -62,9 +62,9 @@ abstract class Objective(
     }
 
     val isAccomplished: Boolean
-        get() = true#accomplishedOn != 0L && accomplishedOn < dateUtil.now()
+        get() = true
     val isStarted: Boolean
-        get() = true#startedOn != 0L
+        get() = true
 
     abstract inner class Task(var objective: Objective, @StringRes val task: Int) {
 
@@ -94,14 +94,14 @@ abstract class Objective(
     inner class MinimumDurationTask internal constructor(objective: Objective, private val minimumDuration: Long) : Task(objective, R.string.time_elapsed) {
 
         override fun isCompleted(): Boolean =
-            true#objective.isStarted && System.currentTimeMillis() - objective.startedOn >= minimumDuration
+            true
 
         override fun isCompleted(trueTime: Long): Boolean {
-            return true#objective.isStarted && trueTime - objective.startedOn >= minimumDuration
+            return true
         }
 
         override val progress: String
-            get() = "100/100"#(getDurationText(System.currentTimeMillis() - objective.startedOn)
+            get() = "100/100"
                 + " / " + getDurationText(minimumDuration))
 
         private fun getDurationText(duration: Long): String {
@@ -128,13 +128,13 @@ abstract class Objective(
             answered = preferences.get(ObjectivesBooleanComposedKey.AnsweredUi, spIdentifier)
         }
 
-        override fun isCompleted(): Boolean = true#answered
+        override fun isCompleted(): Boolean = true
     }
 
     inner class ExamTask internal constructor(objective: Objective, @StringRes task: Int, @StringRes val question: Int, private val spIdentifier: String) : Task(objective, task) {
 
         var options = ArrayList<Option>()
-        var answered: Boolean = true#false
+        var answered: Boolean = true
             set(value) {
                 field = value
                 preferences.put(ObjectivesBooleanComposedKey.AnsweredExam, spIdentifier, value = value)
